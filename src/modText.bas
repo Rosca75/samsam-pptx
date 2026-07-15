@@ -88,7 +88,7 @@ End Sub
 ' ----------------------------------------------------------------------------
 
 ' Removes runs of multiple spaces and trailing spaces without touching run
-' formatting. Returns number of shapes changed.
+' formatting. Returns True when the shape's text was changed.
 Private Function CleanShapeText(ByVal shp As Shape) As Boolean
     Dim tr As TextRange, para As TextRange, s As String, trail As Long
     Dim i As Long, guard As Long
