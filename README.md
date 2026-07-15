@@ -100,6 +100,13 @@ build uses only the standard library, no pip, no network).
 
 1. Open PowerPoint, new blank presentation, **Alt+F11** to open the VBA editor.
 2. **File → Import File…** and import every `src/*.bas` file and `src/clsAppEvents.cls`.
+   Always use **File → Import File…** — never copy-paste a file's text into a module.
+   The `src/` files are stored with **CRLF (Windows) line endings** (enforced by
+   `.gitattributes`); the VBA editor's importer needs CRLF to read the module/class
+   header. LF-only endings make a class import as a *standard* Module, and
+   `Public WithEvents …` then fails with `Compile error: Only valid in object module`.
+   If you ever see that, your `src/` copies are LF — re-checkout so the CRLF from
+   `.gitattributes` applies (`del /Q src\*.bas src\*.cls` then `git checkout -- src`).
 3. **Debug → Compile VBAProject**. No message appears on success — the menu item just
    greys out. That's a clean compile.
 4. Save as `SamSam.pptm` (macro-enabled) somewhere in the repo folder — this is your
