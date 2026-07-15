@@ -1,0 +1,7 @@
+# VBA source and Windows batch files MUST stay CRLF — the VBA editor's
+# File > Import File... parser requires CRLF to recognize module/class headers.
+# LF-only endings cause classes to import as standard modules (WithEvents then
+# fails with "Only valid in object module").
+*.bas   text eol=crlf
+*.cls   text eol=crlf
+*.bat   text eol=crlf
