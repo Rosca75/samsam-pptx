@@ -230,91 +230,60 @@ Grouped by theme; the ★ marks the candidates recommended for v1 or v1.1.
 
 ---
 
-## Proposed v1 feature list (prioritised)
+## Shipped feature list (after the ribbon trim)
+
+> **Scope note (2026-07-17).** An earlier, broader Tier 1–3 build was reduced to the
+> focused set below, driven by the approved keep-list in `CR.xlsx`. Whole feature
+> areas were removed from the ribbon, the VBA and the docs: shape positioning
+> (align / centre / nudge / exact XY / THOR pick-up-apply / swap), font tools, the
+> theme-colour galleries and tints/shades, off-slide finders, insertable micro-visuals
+> (Harvey balls / RAG), guides, agenda tools, the format painter (incl. sticky), and
+> the off-theme colour report/linter. The prior survey tables above are retained as the
+> research record, not as a statement of current scope. The list below is what ships.
 
 Everything below is ribbon-button-driven, pure object-model VBA, and respects the exclusions.
-Order within each module is build order; the module order is the build order overall.
 Convention throughout: **the first-selected shape is the reference**, and every operation
 guards the selection with a clear message.
 
-### Tier 1 — core (must ship)
-
 **modSizing**
-1. Match width / height / both to reference shape
-2. Make all shapes the size of the largest / smallest in selection
-3. Set exact width / height via input box (cm)
-4. Scale selection by a percentage (input box; positions kept)
-
-**modPositioning**
-5. Align left / right / top / bottom / centre / middle — with a ribbon **toggle** for
-   align-to-slide vs align-to-selection (selection mode aligns to the reference shape)
-6. Centre on slide: horizontally, vertically, both
-7. Nudge L/R/U/D by a precise increment (configurable step, input box to change)
-8. Set exact X / Y via input box
+1. Make all shapes the size of the largest / smallest in selection
+2. Stretch shape edge (left / right / top / bottom) to the reference shape's matching edge
 
 **modArrange**
-9. Distribute horizontally / vertically with equal gaps
-10. Distribute with a user-specified fixed gap (H and V)
-11. Arrange selection into a grid of N columns (prompt for N and gap)
-12. Swap the positions of exactly two shapes (centre-anchored)
+3. Distribute with a user-specified fixed gap (H and V)
+4. Stack / abut shapes with zero gap (H and V)
+5. Arrange selection into a grid of N columns (prompt for N and gap)
 
-**modFont**
-13. Apply theme heading font / body font to selection
-14. One-click size buttons (10 / 12 / 14 / 18 / 24 pt) + set-exact-size input
-15. Increase / decrease font size stepwise across mixed selections
-16. Match font (name, size, bold/italic, colour) of reference shape
+**modSelect**
+6. Select all shapes on the slide with same fill / same font / same size / same type as
+   the reference
 
-**modColor** (flagship)
-17. Live theme palette: dynamic ribbon gallery reading the active scheme
-    (`getItemCount`/`getItemImage`/`onAction`), one gallery each for **fill**, **line**,
-    **text** targets; fallback design ready (fixed accent-button rows) if galleries misbehave
-18. All application via `ObjectThemeColor` (msoThemeColorAccent1…6, dark/light 1–2) — never RGB
-19. Apply to fill + line together ("paint whole shape")
+**modText**
+7. Set proofing language for the whole deck (incl. masters, layouts and notes) via input box
+8. **One-click EN (English UK) and FR (French) deck-language presets** — the two languages
+   used most often here, reachable without the input box (Luxembourg office reality)
+9. Remove double / trailing spaces across the deck; delete empty text boxes
+10. Toggle text-box margins none / normal on selection; toggle word-wrap
 
-### Tier 2 — discoveries that earned a place (ship in v1)
-
-**modSizing / modPositioning extras**
-20. **Pick up position & size / apply position & size** (THOR pattern) — the category's
-    most-loved tool; also gives "make all titles sit identically across slides" for free
-21. Stack/abut shapes with zero gap (left/top variants), as the natural sibling of
-    fixed-gap distribute
-
-**modSelect (new)**
-22. Select all shapes on the slide with same fill / same font / same size / same type as
-    the reference — multiplies the value of every other tool
-23. Select all off-slide shapes (gutter junk finder)
-
-**modText (new)**
-24. Set proofing language for the whole deck (incl. masters and notes) — one input, huge pain
-    removed (Luxembourg office reality: FR/DE/EN mixed decks)
-25. Remove double/trailing spaces across the deck; delete empty text boxes
-26. Toggle text-box margins none/normal on selection; toggle word-wrap
-
-**modClean (new)**
-27. Remove all speaker notes (with confirmation)
-28. Delete unused slide masters/layouts (with report of what was removed)
-29. Position/size read-out of the reference shape (inspector MsgBox, values in cm — doubles
+**modClean**
+11. Remove all speaker notes (with confirmation)
+12. Delete unused slide masters / layouts (with report of what was removed)
+13. Position/size read-out of the reference shape (inspector MsgBox, values in cm — doubles
     as a debugging aid)
 
-### Tier 3 — deferred to v1.1 (documented, not built yet)
-
-- Harvey balls / RAG status generators (theme-coloured native shapes)
-- Make-same corner radius / adjustment values; stretch-edge-to-reference
-- Guide-grid builder; make guides from selection
-- Tints & shades rows in the colour galleries; off-theme colour report
-- Full sticky format painter (needs Application-events plumbing)
-- Agenda/section tools; deck statistics; multi-slide shape sync; deck linter
+**modAudit**
+14. Deck statistics: slides, shapes, words, fonts in use, hidden and off-slide object census
 
 ### Why this cut
 
-- Tiers 1–2 are ~29 operations across 8 modules — enough to transform daily editing, small
-  enough to build and manually test through the round-trip workflow in one iteration.
-- Everything in Tier 1–2 is **low or low-med effort** except the colour gallery (med, and it
-  has a designed fallback). Nothing depends on Win32 declares, application events, tags, or
-  modeless forms — the fragile techniques are all quarantined in Tier 3.
-- The three new modules (Select/Text/Clean) each cost little but cover the highest-value
-  discoveries; they were chosen over flashier candidates (agenda tools, painters) because
-  their failure modes are benign and their VBA is simple and testable.
+- The set is deliberately small: only the operations on the approved keep-list, each
+  low-effort, each reachable from a ribbon button and guarded with a clear message.
+- Nothing here depends on Win32 declares, Application events, WithEvents, dynamic ribbon
+  galleries, or modeless forms — every fragile technique from the broader build was removed
+  with its feature area, so the remaining surface is simple and manually testable.
+- `modCommon` remains the shared base (guards, cm/pt conversion, theme access); `modRibbon`
+  is now just the `onLoad` handler and the shared IRibbonUI reference — all feature callbacks
+  live in their own modules.
 
 ---
 

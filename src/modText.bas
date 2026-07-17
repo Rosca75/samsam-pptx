@@ -46,22 +46,10 @@ Private Sub SetLanguageOnShapes(ByVal shapesColl As Shapes, ByVal langId As Long
     Next shp
 End Sub
 
-Public Sub SetDeckLanguage(control As Object)
-    Const OP As String = "Set proofing language (whole deck)"
-    On Error GoTo Oops
-    Dim code As String, langId As Long, count As Long
-    Dim sld As Slide, des As Design, lay As CustomLayout
-    code = InputBox("Set the proofing language for the ENTIRE deck " & _
-                    "(all slides, notes, masters, layouts)." & vbCrLf & vbCrLf & _
-                    "Codes: EN-US, EN-GB, FR, FR-LU, DE, DE-LU, NL, IT, ES, PT", _
-                    APP_NAME, "EN-GB")
-    If Len(Trim$(code)) = 0 Then Exit Sub
-    langId = LanguageIdFromCode(code)
-    If langId = 0 Then
-        MsgBox "Unknown language code '" & code & "'. Use one of: " & _
-               "EN-US, EN-GB, FR, FR-LU, DE, DE-LU, NL, IT, ES, PT", vbExclamation, APP_NAME
-        Exit Sub
-    End If
+' Shared engine: applies langId to every text frame in the deck (slides, notes,
+' masters, layouts) plus the presentation default, then reports using label.
+Private Sub ApplyDeckLanguage(ByVal langId As Long, ByVal label As String)
+    Dim count As Long, sld As Slide, des As Design, lay As CustomLayout
     For Each sld In ActivePres.Slides
         SetLanguageOnShapes sld.Shapes, langId, count
         SetLanguageOnShapes sld.NotesPage.Shapes, langId, count
@@ -75,9 +63,44 @@ Public Sub SetDeckLanguage(control As Object)
     ' also set the presentation default so NEW text boxes follow
     On Error Resume Next
     ActivePres.DefaultLanguageID = langId
-    On Error GoTo Oops
-    Inform "Proofing language set to " & UCase$(Trim$(code)) & " on " & count & _
+    On Error GoTo 0
+    Inform "Proofing language set to " & label & " on " & count & _
            " text frames (slides, notes, masters, layouts)."
+End Sub
+
+Public Sub SetDeckLanguage(control As Object)
+    Const OP As String = "Set proofing language (whole deck)"
+    On Error GoTo Oops
+    Dim code As String, langId As Long
+    code = InputBox("Set the proofing language for the ENTIRE deck " & _
+                    "(all slides, notes, masters, layouts)." & vbCrLf & vbCrLf & _
+                    "Codes: EN-US, EN-GB, FR, FR-LU, DE, DE-LU, NL, IT, ES, PT", _
+                    APP_NAME, "EN-GB")
+    If Len(Trim$(code)) = 0 Then Exit Sub
+    langId = LanguageIdFromCode(code)
+    If langId = 0 Then
+        MsgBox "Unknown language code '" & code & "'. Use one of: " & _
+               "EN-US, EN-GB, FR, FR-LU, DE, DE-LU, NL, IT, ES, PT", vbExclamation, APP_NAME
+        Exit Sub
+    End If
+    ApplyDeckLanguage langId, UCase$(Trim$(code))
+    Exit Sub
+Oops:
+    ReportError OP
+End Sub
+
+' One-click presets. Tag-dispatched: control.Tag = "EN-GB" | "FR".
+Public Sub SetDeckLanguagePreset(control As Object)
+    Const OP As String = "Set proofing language (preset)"
+    On Error GoTo Oops
+    Dim code As String, langId As Long
+    code = CStr(control.Tag)
+    langId = LanguageIdFromCode(code)
+    If langId = 0 Then
+        MsgBox "Unknown language code '" & code & "'.", vbExclamation, APP_NAME
+        Exit Sub
+    End If
+    ApplyDeckLanguage langId, UCase$(Trim$(code))
     Exit Sub
 Oops:
     ReportError OP

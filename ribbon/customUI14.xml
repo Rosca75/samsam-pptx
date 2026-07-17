@@ -17,152 +17,39 @@
       <tab id="ssTab" label="SamSam">
 
         <group id="ssGrpSize" label="Sizing">
-          <button id="ssMatchW" label="Match width" imageMso="Copy" size="normal"
-                  tag="W" onAction="MatchSizeToReference"
-                  screentip="Match width to reference"
-                  supertip="Sets the width of every selected shape to the width of the FIRST-selected (reference) shape. Top-left corners stay put."/>
-          <button id="ssMatchH" label="Match height" imageMso="Copy" size="normal"
-                  tag="H" onAction="MatchSizeToReference"
-                  screentip="Match height to reference"
-                  supertip="Sets the height of every selected shape to the height of the FIRST-selected (reference) shape."/>
-          <button id="ssMatchB" label="Match size" imageMso="Paste" size="normal"
-                  tag="B" onAction="MatchSizeToReference"
-                  screentip="Match width AND height to reference"
-                  supertip="Sets width and height of every selected shape to those of the FIRST-selected (reference) shape."/>
           <menu id="ssMnuSize" label="More sizing" imageMso="ShapesInsertGallery" size="normal">
-            <button id="ssSizeMax" label="All like largest" tag="MAX" onAction="SizeToExtreme"
+            <button id="ssSizeMax" label="All like largest" imageMso="Consolidate" tag="MAX" onAction="SizeToExtreme"
                     supertip="Resizes every selected shape to the size of the largest (by area) shape in the selection."/>
-            <button id="ssSizeMin" label="All like smallest" tag="MIN" onAction="SizeToExtreme"
+            <button id="ssSizeMin" label="All like smallest" imageMso="SmartArtSmallerShape" tag="MIN" onAction="SizeToExtreme"
                     supertip="Resizes every selected shape to the size of the smallest (by area) shape in the selection."/>
-            <button id="ssSizeExact" label="Set exact size (cm)…" onAction="SetExactSize"
-                    supertip="Type an exact width and/or height in cm for all selected shapes. Leave a value empty to keep it."/>
-            <button id="ssSizeScale" label="Scale by %…" onAction="ScaleSelection"
-                    supertip="Scales every selected shape by a percentage about its own centre."/>
             <menuSeparator id="ssSepStretch"/>
-            <button id="ssStretchL" label="Stretch left edge to reference" tag="L" onAction="StretchEdgeToReference"
+            <button id="ssStretchL" label="Stretch left edge to reference" imageMso="FillLeft" tag="L" onAction="StretchEdgeToReference"
                     supertip="Moves each shape's LEFT edge to the reference shape's left edge; the right edge stays."/>
-            <button id="ssStretchR" label="Stretch right edge to reference" tag="R" onAction="StretchEdgeToReference"
+            <button id="ssStretchR" label="Stretch right edge to reference" imageMso="FillRight" tag="R" onAction="StretchEdgeToReference"
                     supertip="Moves each shape's RIGHT edge to the reference shape's right edge; the left edge stays."/>
-            <button id="ssStretchT" label="Stretch top edge to reference" tag="T" onAction="StretchEdgeToReference"
+            <button id="ssStretchT" label="Stretch top edge to reference" imageMso="FillUp" tag="T" onAction="StretchEdgeToReference"
                     supertip="Moves each shape's TOP edge to the reference shape's top edge; the bottom edge stays."/>
-            <button id="ssStretchB" label="Stretch bottom edge to reference" tag="B" onAction="StretchEdgeToReference"
+            <button id="ssStretchB" label="Stretch bottom edge to reference" imageMso="FillDown" tag="B" onAction="StretchEdgeToReference"
                     supertip="Moves each shape's BOTTOM edge to the reference shape's bottom edge; the top edge stays."/>
           </menu>
         </group>
 
-        <group id="ssGrpPos" label="Position">
-          <toggleButton id="ssAlignMode" label="Align to slide" imageMso="SelectionPane" size="normal"
-                        getPressed="GetAlignPressed" onAction="OnAlignToggle"
-                        screentip="Toggle: align to slide vs align to selection"
-                        supertip="Pressed: the align buttons align every shape to the SLIDE. Not pressed: they align to the SELECTION's reference shape (the FIRST one you selected)."/>
-          <button id="ssAlignL" label="Left" tag="L" onAction="AlignShapes" size="normal"
-                  supertip="Align left — to the slide edge or to the reference shape, per the toggle."/>
-          <button id="ssAlignC" label="Centre" tag="C" onAction="AlignShapes" size="normal"
-                  supertip="Align horizontal centres — to the slide or to the reference shape, per the toggle."/>
-          <button id="ssAlignR" label="Right" tag="R" onAction="AlignShapes" size="normal"
-                  supertip="Align right — to the slide edge or to the reference shape, per the toggle."/>
-          <button id="ssAlignT" label="Top" tag="T" onAction="AlignShapes" size="normal"
-                  supertip="Align top — to the slide edge or to the reference shape, per the toggle."/>
-          <button id="ssAlignM" label="Middle" tag="M" onAction="AlignShapes" size="normal"
-                  supertip="Align vertical middles — to the slide or to the reference shape, per the toggle."/>
-          <button id="ssAlignB" label="Bottom" tag="B" onAction="AlignShapes" size="normal"
-                  supertip="Align bottom — to the slide edge or to the reference shape, per the toggle."/>
-          <menu id="ssMnuPos" label="More position" imageMso="ObjectBringToFront" size="normal">
-            <button id="ssCenterH" label="Centre on slide (horizontal)" tag="H" onAction="CenterOnSlide"/>
-            <button id="ssCenterV" label="Centre on slide (vertical)" tag="V" onAction="CenterOnSlide"/>
-            <button id="ssCenterB" label="Centre on slide (both)" tag="B" onAction="CenterOnSlide"/>
-            <menuSeparator id="ssSepNudge"/>
-            <button id="ssNudgeL" label="Nudge left" tag="L" onAction="NudgeShapes"/>
-            <button id="ssNudgeR" label="Nudge right" tag="R" onAction="NudgeShapes"/>
-            <button id="ssNudgeU" label="Nudge up" tag="U" onAction="NudgeShapes"/>
-            <button id="ssNudgeD" label="Nudge down" tag="D" onAction="NudgeShapes"/>
-            <button id="ssNudgeSet" label="Set nudge step (cm)…" onAction="SetNudgeStep"/>
-            <menuSeparator id="ssSepXY"/>
-            <button id="ssPosExact" label="Set exact X / Y (cm)…" onAction="SetExactPosition"/>
-            <button id="ssSwap" label="Swap two shapes" onAction="SwapShapes"
-                    supertip="Swaps the CENTRE positions of exactly two selected shapes."/>
-          </menu>
-          <menu id="ssMnuThor" label="Pick up / apply" imageMso="PasteSpecialDialog" size="normal"
-                supertip="THOR pattern: pick up position and size once, then stamp it onto shapes on ANY slide — e.g. to make every title sit identically.">
-            <button id="ssPickPS" label="Pick up pos + size" onAction="PickUpPositionSize"
-                    supertip="Remembers the reference (first-selected) shape's position and size for the Apply buttons."/>
-            <button id="ssApplyB" label="Apply pos + size" tag="B" onAction="ApplyPositionSize"/>
-            <button id="ssApplyP" label="Apply position only" tag="P" onAction="ApplyPositionSize"/>
-            <button id="ssApplyS" label="Apply size only" tag="S" onAction="ApplyPositionSize"/>
-          </menu>
-        </group>
-
         <group id="ssGrpArr" label="Arrange">
-          <button id="ssDistH" label="Distribute H" imageMso="TableColumnsDistribute" size="normal"
-                  tag="H" onAction="DistributeEqual"
-                  supertip="Distributes the selected shapes horizontally with EQUAL gaps; the outer shapes stay put. Needs 3+ shapes."/>
-          <button id="ssDistV" label="Distribute V" imageMso="TableRowsDistribute" size="normal"
-                  tag="V" onAction="DistributeEqual"
-                  supertip="Distributes the selected shapes vertically with EQUAL gaps; the outer shapes stay put. Needs 3+ shapes."/>
-          <menu id="ssMnuArr" label="More arrange" imageMso="ObjectsGroup" size="normal">
-            <button id="ssDistFH" label="Fixed gap horizontal…" tag="H" onAction="DistributeFixedGap"
-                    supertip="Places the shapes left-to-right with an exact gap in cm; the leftmost shape anchors the row."/>
-            <button id="ssDistFV" label="Fixed gap vertical…" tag="V" onAction="DistributeFixedGap"/>
-            <button id="ssStackH" label="Stack horizontally (zero gap)" tag="H" onAction="StackShapes"
-                    supertip="Abuts the shapes left-to-right with no gap."/>
-            <button id="ssStackV" label="Stack vertically (zero gap)" tag="V" onAction="StackShapes"/>
-            <button id="ssGrid" label="Arrange in grid…" onAction="GridArrange"
-                    supertip="Lays the selection out in N columns. Shapes are placed in SELECTION order; the reference shape's top-left corner is the grid origin."/>
-          </menu>
-        </group>
-
-        <group id="ssGrpFont" label="Font">
-          <button id="ssFontHead" label="Heading font" imageMso="Bold" size="normal"
-                  tag="HEAD" onAction="ApplyThemeFont"
-                  supertip="Applies the THEME heading font — text keeps tracking the theme."/>
-          <button id="ssFontBody" label="Body font" imageMso="Italic" size="normal"
-                  tag="BODY" onAction="ApplyThemeFont"
-                  supertip="Applies the THEME body font — text keeps tracking the theme."/>
-          <button id="ssFontGrow" label="Grow" imageMso="GrowFont" size="normal"
-                  tag="+" onAction="StepFontSize"
-                  supertip="Increases every text run by 2 pt — mixed sizes keep their differences."/>
-          <button id="ssFontShrink" label="Shrink" imageMso="ShrinkFont" size="normal"
-                  tag="-" onAction="StepFontSize"/>
-          <menu id="ssMnuFont" label="Font size" imageMso="ChangeCaseGallery" size="normal">
-            <button id="ssFs10" label="10 pt" tag="10" onAction="SetFontSizeButton"/>
-            <button id="ssFs12" label="12 pt" tag="12" onAction="SetFontSizeButton"/>
-            <button id="ssFs14" label="14 pt" tag="14" onAction="SetFontSizeButton"/>
-            <button id="ssFs18" label="18 pt" tag="18" onAction="SetFontSizeButton"/>
-            <button id="ssFs24" label="24 pt" tag="24" onAction="SetFontSizeButton"/>
-            <button id="ssFsExact" label="Exact size…" onAction="SetExactFontSize"/>
-            <menuSeparator id="ssSepFont"/>
-            <button id="ssFontMatch" label="Match reference font" onAction="MatchFontToReference"
-                    supertip="Copies the FIRST-selected shape's font name, size, bold/italic and colour to the other selected shapes."/>
-          </menu>
-        </group>
-
-        <group id="ssGrpColor" label="Theme colours">
-          <gallery id="ssGalFill" label="Fill" imageMso="FillColorPicker" size="large"
-                   columns="10" tag="fill" showItemLabel="false"
-                   getItemCount="GetPaletteCount" getItemImage="GetPaletteItemImage"
-                   getItemScreentip="GetPaletteItemScreentip" onAction="OnPaletteAction"
-                   supertip="Live palette of THIS deck's theme colours (plus lighter/darker rows). Applied as theme colours, so shapes follow future theme changes."/>
-          <gallery id="ssGalLine" label="Line" imageMso="FontColorPicker" size="large"
-                   columns="10" tag="line" showItemLabel="false"
-                   getItemCount="GetPaletteCount" getItemImage="GetPaletteItemImage"
-                   getItemScreentip="GetPaletteItemScreentip" onAction="OnPaletteAction"
-                   supertip="Applies a theme colour to the outline of the selected shapes."/>
-          <gallery id="ssGalText" label="Text" imageMso="FontColorPicker" size="large"
-                   columns="10" tag="text" showItemLabel="false"
-                   getItemCount="GetPaletteCount" getItemImage="GetPaletteItemImage"
-                   getItemScreentip="GetPaletteItemScreentip" onAction="OnPaletteAction"
-                   supertip="Applies a theme colour to the text of the selected shapes."/>
-          <gallery id="ssGalBoth" label="Fill + line" imageMso="FillColorPicker" size="large"
-                   columns="10" tag="both" showItemLabel="false"
-                   getItemCount="GetPaletteCount" getItemImage="GetPaletteItemImage"
-                   getItemScreentip="GetPaletteItemScreentip" onAction="OnPaletteAction"
-                   supertip="Paints the whole shape: fill AND line in one theme colour."/>
-          <menu id="ssMnuColor" label="More" imageMso="Refresh" size="normal">
-            <button id="ssColRefresh" label="Refresh palette" onAction="RefreshPalette"
-                    supertip="Reloads the galleries from the ACTIVE presentation's theme — use after switching decks or changing the theme."/>
-            <button id="ssColNoFill" label="No fill" onAction="RemoveFill"/>
-            <button id="ssColNoLine" label="No line" onAction="RemoveLine"/>
-          </menu>
+          <button id="ssDistFH" label="Fixed gap horizontal…" imageMso="ObjectsAlignDistributeHorizontallyRe" size="normal"
+                  tag="H" onAction="DistributeFixedGap"
+                  supertip="Places the shapes left-to-right with an exact gap in cm; the leftmost shape anchors the row."/>
+          <button id="ssDistFV" label="Fixed gap vertical…" imageMso="ObjectsAlignDistributeVerticallyRemo" size="normal"
+                  tag="V" onAction="DistributeFixedGap"
+                  supertip="Places the shapes top-to-bottom with an exact gap in cm; the topmost shape anchors the column."/>
+          <button id="ssStackH" label="Stack horizontally (zero gap)" imageMso="HorizontalSpacingDecrease" size="normal"
+                  tag="H" onAction="StackShapes"
+                  supertip="Abuts the shapes left-to-right with no gap."/>
+          <button id="ssStackV" label="Stack vertically (zero gap)" imageMso="VerticalSpacingDecrease" size="normal"
+                  tag="V" onAction="StackShapes"
+                  supertip="Abuts the shapes top-to-bottom with no gap."/>
+          <button id="ssGrid" label="Arrange in grid…" imageMso="TableShowGridlines" size="normal"
+                  onAction="GridArrange"
+                  supertip="Lays the selection out in N columns. Shapes are placed in SELECTION order; the reference shape's top-left corner is the grid origin."/>
         </group>
 
         <group id="ssGrpSelect" label="Select">
@@ -173,18 +60,18 @@
             <button id="ssSameSize" label="Same size" tag="SIZE" onAction="SelectSame"/>
             <button id="ssSameType" label="Same shape type" tag="TYPE" onAction="SelectSame"/>
           </menu>
-          <button id="ssOffSlide" label="Off-slide here" imageMso="FindDialog" size="normal"
-                  onAction="SelectOffSlideShapes"
-                  supertip="Selects every shape parked fully outside this slide's area (gutter junk)."/>
-          <button id="ssOffSlideAll" label="Off-slide report" imageMso="ReplaceDialog" size="normal"
-                  onAction="ReportOffSlideShapes"
-                  supertip="Lists all fully off-slide shapes across the whole deck."/>
         </group>
 
         <group id="ssGrpText" label="Text">
           <button id="ssLang" label="Deck language" imageMso="SetLanguage" size="large"
                   onAction="SetDeckLanguage"
                   supertip="Sets the proofing language of EVERY text frame — slides, notes, masters and layouts — in one go."/>
+          <button id="ssLangEN" label="EN" imageMso="EnglishWritingAssistant" size="normal"
+                  tag="EN-GB" onAction="SetDeckLanguagePreset"
+                  supertip="One click: sets the proofing language of the WHOLE deck to English (UK)."/>
+          <button id="ssLangFR" label="FR" imageMso="GetPowerQueryDataFromWeb" size="normal"
+                  tag="FR" onAction="SetDeckLanguagePreset"
+                  supertip="One click: sets the proofing language of the WHOLE deck to French (FR)."/>
           <menu id="ssMnuText" label="Text cleanup" imageMso="Spelling" size="normal">
             <button id="ssCleanTxt" label="Remove double / trailing spaces (deck)" onAction="CleanDeckText"/>
             <button id="ssEmptyTb" label="Delete empty text boxes (deck)" onAction="DeleteEmptyTextBoxes"/>
@@ -203,76 +90,15 @@
           <button id="ssMasters" label="Unused masters" imageMso="ViewSlideMasterView" size="normal"
                   onAction="DeleteUnusedMasters"
                   supertip="Deletes slide masters and layouts no slide uses, and reports what was removed."/>
-          <button id="ssInspect" label="Inspector" imageMso="HappyFace" size="normal"
+          <button id="ssInspect" label="Inspector" imageMso="RulesToCheck" size="normal"
                   onAction="InspectShape"
                   supertip="Position/size read-out (in cm) of the reference shape — also a debugging aid."/>
-        </group>
-
-        <group id="ssGrpInsert" label="Insert">
-          <menu id="ssMnuHarvey" label="Harvey ball" imageMso="ShapesInsertGallery" size="normal"
-                supertip="Inserts a theme-coloured Harvey ball drawn from native shapes (not a picture).">
-            <button id="ssHb0" label="0 %" tag="0" onAction="InsertHarveyBall"/>
-            <button id="ssHb25" label="25 %" tag="25" onAction="InsertHarveyBall"/>
-            <button id="ssHb50" label="50 %" tag="50" onAction="InsertHarveyBall"/>
-            <button id="ssHb75" label="75 %" tag="75" onAction="InsertHarveyBall"/>
-            <button id="ssHb100" label="100 %" tag="100" onAction="InsertHarveyBall"/>
-          </menu>
-          <menu id="ssMnuRag" label="RAG status" imageMso="ShapesInsertGallery" size="normal"
-                supertip="Inserts a red/amber/green status dot (brand-fixed colours by design).">
-            <button id="ssRagR" label="Red" tag="R" onAction="InsertRAG"/>
-            <button id="ssRagA" label="Amber" tag="A" onAction="InsertRAG"/>
-            <button id="ssRagG" label="Green" tag="G" onAction="InsertRAG"/>
-          </menu>
-        </group>
-
-        <group id="ssGrpGuides" label="Guides">
-          <button id="ssGuideGrid" label="Guide grid" imageMso="GridSettings" size="normal"
-                  onAction="BuildGuideGrid"
-                  supertip="Builds margin and column guides from your margin / columns / gutter input."/>
-          <button id="ssGuideSel" label="From selection" imageMso="GridSettings" size="normal"
-                  onAction="GuidesFromSelection"
-                  supertip="Adds guides on the selection's bounding box."/>
-          <button id="ssGuideDel" label="Clear guides" imageMso="Delete" size="normal"
-                  onAction="DeleteAllGuides"/>
-        </group>
-
-        <group id="ssGrpAgenda" label="Agenda">
-          <button id="ssAgendaBuild" label="Build / update" imageMso="SlideNew" size="normal"
-                  onAction="BuildAgenda"
-                  supertip="Creates one divider slide per PowerPoint section, with the agenda list and the current section emphasised. Rerun any time — dividers are tagged and rebuilt in place."/>
-          <button id="ssAgendaDel" label="Remove dividers" imageMso="Delete" size="normal"
-                  onAction="RemoveAgenda"/>
-        </group>
-
-        <group id="ssGrpPainter" label="Painter">
-          <button id="ssPickFmt" label="Pick up format" imageMso="Copy" size="normal"
-                  onAction="PickUpFormat"
-                  supertip="Remembers the reference shape's complete format for repeated applying."/>
-          <button id="ssApplyFmt" label="Apply format" imageMso="Paste" size="normal"
-                  onAction="ApplyFormat"
-                  supertip="Applies the picked-up format to all selected shapes — works across slides, as often as you like."/>
-          <toggleButton id="ssSticky" label="Sticky painter" imageMso="PasteSpecialDialog" size="normal"
-                        getPressed="GetPainterPressed" onAction="OnPainterToggle"
-                        supertip="While ON, every shape you click receives the picked-up format. Click again to stop. (If no format was picked up, the first selected shape becomes the source.)"/>
-          <menu id="ssMnuAdj" label="Adjustments" imageMso="ShapesInsertGallery" size="normal">
-            <button id="ssMatchAdj" label="Match adjustments to reference" onAction="MatchAdjustments"
-                    supertip="Copies corner radius / chevron angle / etc. from the reference to same-type shapes."/>
-            <button id="ssCornerRad" label="Set corner radius (cm)…" onAction="SetCornerRadius"/>
-          </menu>
         </group>
 
         <group id="ssGrpAudit" label="Audit">
           <button id="ssStats" label="Deck statistics" imageMso="VisualBasic" size="normal"
                   onAction="DeckStatistics"
                   supertip="Slides, shapes, words, fonts in use, hidden and off-slide object census."/>
-          <button id="ssColorReport" label="Off-theme colours" imageMso="FontColorPicker" size="normal"
-                  onAction="OffThemeColorReport"
-                  supertip="Lists every hard-coded (non-theme) fill, line and text colour in the deck — those will NOT follow a theme change. Long reports land on a report slide at the end."/>
-          <menu id="ssMnuAudit" label="Fix" imageMso="Refresh" size="normal">
-            <button id="ssSelOffTheme" label="Select off-theme on this slide" onAction="SelectOffThemeOnSlide"
-                    supertip="Selects the offenders on the current slide, ready for the theme galleries."/>
-            <button id="ssDelReport" label="Remove report slide" onAction="RemoveReportSlide"/>
-          </menu>
         </group>
 
       </tab>

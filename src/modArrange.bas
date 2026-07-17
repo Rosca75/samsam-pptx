@@ -68,19 +68,6 @@ Private Sub Distribute(ByVal sr As ShapeRange, ByVal horizontal As Boolean, ByVa
     End If
 End Sub
 
-' Tag-dispatched: "H" | "V" — equal gaps, outer shapes keep their edges.
-Public Sub DistributeEqual(control As Object)
-    Const OP As String = "Distribute with equal gaps"
-    On Error GoTo Oops
-    Dim sr As ShapeRange
-    Set sr = GuardShapes(3, OP)
-    If sr Is Nothing Then Exit Sub
-    Distribute sr, (control.Tag = "H"), NUM_CANCELLED
-    Exit Sub
-Oops:
-    ReportError OP
-End Sub
-
 ' Tag-dispatched: "H" | "V" — fixed gap in cm, first shape anchors the row.
 Public Sub DistributeFixedGap(control As Object)
     Const OP As String = "Distribute with fixed gap"
