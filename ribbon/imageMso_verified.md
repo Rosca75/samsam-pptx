@@ -21,7 +21,10 @@ Runtime Error, the fastest triage is to replace the suspect ID with `HappyFace`
 
 Status legend: **confirmed** = seen working in the target PowerPoint;
 **high-confidence** = ID of a control that exists on PowerPoint's own ribbon or a
-classic cross-app icon; verify on first load and promote to confirmed.
+classic cross-app icon; verify on first load and promote to confirmed;
+**candidate** = newly introduced, never yet tested in real PowerPoint — must be
+verified in the Office RibbonX Editor Icon Gallery / on first load before being
+promoted to confirmed.
 
 | ID | Used for | Status |
 |---|---|---|
@@ -53,6 +56,35 @@ classic cross-app icon; verify on first load and promote to confirmed.
 | `GridSettings` | guide buttons | high-confidence (grid & guides dialog) |
 | `SlideNew` | agenda build | high-confidence (Home → New Slide) |
 | `VisualBasic` | deck statistics | high-confidence (Developer tab) |
+
+## Candidates (introduced in the ribbon trim — NOT yet verified)
+
+These were added when the ribbon was reduced to the approved feature list. None
+has been seen in the target PowerPoint yet — verify each on first load (or in the
+Office RibbonX Editor Icon Gallery) and promote to `confirmed`, or replace it.
+
+| ID | Used for | Status |
+|---|---|---|
+| `Consolidate` | sizing — all like largest (`ssSizeMax`) | candidate |
+| `SmartArtSmallerShape` | sizing — all like smallest (`ssSizeMin`) | candidate |
+| `FillLeft` | sizing — stretch left edge to reference (`ssStretchL`) | candidate |
+| `FillRight` | sizing — stretch right edge to reference (`ssStretchR`) | candidate |
+| `FillUp` | sizing — stretch top edge to reference (`ssStretchT`) | candidate |
+| `FillDown` | sizing — stretch bottom edge to reference (`ssStretchB`) | candidate |
+| `ObjectsAlignDistributeHorizontallyRe` | arrange — fixed gap horizontal (`ssDistFH`) | candidate ⚠️ |
+| `ObjectsAlignDistributeVerticallyRemo` | arrange — fixed gap vertical (`ssDistFV`) | candidate ⚠️ |
+| `HorizontalSpacingDecrease` | arrange — stack horizontally (`ssStackH`) | candidate |
+| `VerticalSpacingDecrease` | arrange — stack vertically (`ssStackV`) | candidate |
+| `TableShowGridlines` | arrange — arrange in grid (`ssGrid`) | candidate |
+| `RulesToCheck` | clean — inspector (`ssInspect`) | candidate |
+| `EnglishWritingAssistant` | text — EN language preset (`ssLangEN`) | candidate |
+| `GetPowerQueryDataFromWeb` | text — FR language preset (`ssLangFR`) | candidate |
+
+> ⚠️ **`ObjectsAlignDistributeHorizontallyRe` and
+> `ObjectsAlignDistributeVerticallyRemo` look truncated** (as supplied in CR.xlsx —
+> the `…Re` / `…Remo` suffixes appear cut off). Do **not** guess the missing
+> characters. Confirm the exact, full ID in the Office RibbonX Editor's Icon
+> Gallery *before* the first build — an invalid ID takes down the whole tab.
 
 ## First-load verification procedure
 

@@ -10,8 +10,10 @@ way that violates any of them.
 A standalone PowerPoint productivity add-in ("SamSam Tools") written in **VBA**, packaged
 as a **`.ppam`** add-in, with a ribbon tab defined in **`ribbon/customUI14.xml`** that is
 injected into the `.ppam` package by a **Python 3 standard-library-only** script
-(`build/inject_ribbon.py`). The approved feature scope is the full Tier 1 + Tier 2 +
-Tier 3 list in `docs/research.md` ("Proposed v1 feature list").
+(`build/inject_ribbon.py`). The approved feature scope is the reduced keep-list in
+`docs/research.md` ("Shipped feature list (after the ribbon trim)") — the ribbon was
+trimmed from an earlier broader build to only those functions plus one-click EN / FR
+deck-language presets.
 
 ## Fixed technology stack (non-negotiable)
 
@@ -93,21 +95,13 @@ build/build.bat              delete old ppam → inject → print restart remind
 | Module | Scope |
 |---|---|
 | `modCommon.bas` | selection guards, cm/pt conversion, input helpers, theme access — **everything uses this** |
-| `modSizing.bas` | Tier 1: match/extreme/exact/scale sizing; Tier 3: stretch-edge-to-reference |
-| `modPositioning.bas` | Tier 1: align (slide/selection toggle), centre, nudge, exact XY; Tier 2: THOR pick-up/apply position+size, swap |
-| `modArrange.bas` | Tier 1: distribute (equal/fixed gap), grid arrange; Tier 2: stack/abut |
-| `modFont.bas` | Tier 1: theme fonts, size buttons/steppers, match font |
-| `modColor.bas` | Tier 1 flagship: theme-colour application (fill/line/text/both) via ObjectThemeColor; Tier 3 tints & shades |
-| `modRibbon.bas` | all ribbon callbacks: onLoad, gallery item count/image/screentip, toggles, tag dispatch |
-| `modSelect.bas` | Tier 2: select-same (fill/font/size/type), off-slide finder |
-| `modText.bas` | Tier 2: deck proofing language, text cleanup, margins/wrap |
-| `modClean.bas` | Tier 2: notes removal, unused masters/layouts, shape inspector |
-| `modVisuals.bas` | Tier 3: Harvey balls, RAG indicators (generated native geometry) |
-| `modGuides.bas` | Tier 3: guide grid, guides from selection, delete guides |
-| `modAgenda.bas` | Tier 3: section divider/agenda slides (tagged, rebuildable) |
-| `modPainter.bas` | Tier 3: pick-up/apply format, make-same adjustments/corner radius, **sticky painter** |
-| `clsAppEvents.cls` | Tier 3: Application-events plumbing for the sticky painter — deliberately isolated |
-| `modAudit.bas` | Tier 3 (built last, most fragile): deck statistics, off-theme colour report/linter |
+| `modSizing.bas` | all-like-largest/smallest sizing; stretch-edge-to-reference |
+| `modArrange.bas` | distribute (fixed gap), stack/abut, grid arrange |
+| `modRibbon.bas` | shared ribbon plumbing only: `Ribbon_OnLoad` and the shared `gRibbon` (IRibbonUI) reference. Feature callbacks live in their own feature modules. (Pruned in the ribbon trim: the colour-gallery getters, align-mode toggle and sticky-painter toggle callbacks and their swatch-bitmap helpers were removed with their controls.) |
+| `modSelect.bas` | select-same (fill/font/size/type) |
+| `modText.bas` | deck proofing language (interactive + one-click EN / FR presets), text cleanup, margins/wrap |
+| `modClean.bas` | notes removal, unused masters/layouts, shape inspector |
+| `modAudit.bas` | deck statistics |
 
 ## VBA coding conventions (enforced)
 

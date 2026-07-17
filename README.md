@@ -1,10 +1,9 @@
 # SamSam Tools — PowerPoint productivity add-in
 
-A ribbon tab full of everyday slide-editing power tools: precise sizing, alignment and
-distribution, one-click theme colours that keep tracking the theme, font shortcuts,
-selection superpowers, deck cleanup, Harvey balls, agenda slides, a sticky format
-painter, and a deck colour audit. Pure VBA — no installation rights, no internet, no
-signed certificate needed.
+A ribbon tab of everyday slide-editing power tools: precise sizing, shape arranging,
+selection superpowers, deck-wide proofing-language presets, text and deck cleanup, and
+deck statistics. Pure VBA — no installation rights, no internet, no signed certificate
+needed.
 
 > **Golden rule of every tool:** when a tool works "like a reference shape", the
 > **FIRST shape you selected is the reference**. Select the shape you want to copy
@@ -46,48 +45,26 @@ silently showing nothing.
 
 VBA add-ins cannot register real keyboard shortcuts. Instead, **right-click any SamSam
 button → Add to Quick Access Toolbar**. Buttons on the QAT get automatic **Alt+1,
-Alt+2, …** shortcuts — pin your favourites (Align, Match Size, theme Fill) there.
+Alt+2, …** shortcuts — pin your favourites (e.g. Fixed gap, Select same, EN / FR) there.
 
 ---
 
 ## What's on the tab (quick tour)
 
-- **Sizing** — match width/height/both to the first-selected shape, size everything to
-  the largest/smallest, set exact cm sizes, scale by %, stretch an edge to the
-  reference's edge.
-- **Position** — align left/centre/right/top/middle/bottom with a **toggle** that
-  switches between *align to slide* and *align to selection* (= to the first-selected
-  shape); centre on slide; nudge by a precise step you choose; set exact X/Y; **pick up
-  position & size from one shape and apply it to shapes on any slide** (great for making
-  every title sit identically); swap two shapes.
-- **Arrange** — distribute with equal gaps, distribute with an exact gap in cm, stack
-  shapes with zero gap, lay a selection out in a grid of N columns.
-- **Font** — theme heading/body font, one-click sizes, grow/shrink across mixed
-  selections, match the reference shape's font.
-- **Theme colours** (the flagship) — live palettes of the *current* presentation's
-  theme colours (plus lighter/darker rows) applied to **Fill**, **Line**, **Text**, or
-  fill+line together. Colours are applied as *theme* colours, so if the deck's theme
-  changes later, your shapes follow it. Click **Refresh palette** after switching to a
-  presentation with a different theme.
+- **Sizing** — size everything to the largest/smallest shape in the selection, and
+  stretch an edge (left/right/top/bottom) of every shape to the reference's matching edge.
+- **Arrange** — distribute with an exact gap in cm (horizontal / vertical), stack shapes
+  with zero gap (horizontal / vertical), and lay a selection out in a grid of N columns.
 - **Select** — select everything on the slide with the same fill / font / size / type as
-  the first-selected shape; find shapes parked off the slide.
-- **Text** — set the proofing language for the WHOLE deck (incl. masters and notes) in
-  one go; remove double/trailing spaces; delete empty text boxes; margins on/off;
-  word-wrap toggle.
+  the first-selected shape.
+- **Text** — set the proofing language for the WHOLE deck (incl. masters, layouts and
+  notes), either by typing a code or with the one-click **EN** (English UK) and **FR**
+  (French) preset buttons; remove double/trailing spaces; delete empty text boxes;
+  margins on/off; word-wrap toggle.
 - **Clean** — delete all speaker notes; delete unused slide masters/layouts; a shape
   inspector read-out (position/size in cm).
-- **Insert** — Harvey balls (0–100 %) and RAG status dots drawn from native shapes in
-  theme colours.
-- **Guides** — build a margin/column guide grid; make guides from the selection; clear
-  all guides.
-- **Agenda** — generate section-divider slides from your PowerPoint sections (rerun to
-  update; they're tagged so rebuilding replaces them cleanly).
-- **Painter** — pick up a shape's full format and apply it anywhere, repeatedly; a
-  **Sticky painter** toggle that formats every shape you click until you switch it off;
-  copy corner radius / shape adjustments across shapes.
-- **Audit** — deck statistics, and an **off-theme colour report** that lists every
-  hard-coded colour that won't follow the theme (long reports are written onto a report
-  slide at the end of the deck).
+- **Audit** — deck statistics (slides, shapes, words, fonts in use, hidden and off-slide
+  object census).
 
 ---
 
@@ -99,14 +76,12 @@ build uses only the standard library, no pip, no network).
 ### First-time setup of the working file
 
 1. Open PowerPoint, new blank presentation, **Alt+F11** to open the VBA editor.
-2. **File → Import File…** and import every `src/*.bas` file and `src/clsAppEvents.cls`.
-   Always use **File → Import File…** — never copy-paste a file's text into a module.
-   The `src/` files are stored with **CRLF (Windows) line endings** (enforced by
-   `.gitattributes`); the VBA editor's importer needs CRLF to read the module/class
-   header. LF-only endings make a class import as a *standard* Module, and
-   `Public WithEvents …` then fails with `Compile error: Only valid in object module`.
-   If you ever see that, your `src/` copies are LF — re-checkout so the CRLF from
-   `.gitattributes` applies (`del /Q src\*.bas src\*.cls` then `git checkout -- src`).
+2. **File → Import File…** and import every `src/*.bas` module. Always use
+   **File → Import File…** — never copy-paste a file's text into a module. The `src/`
+   files are stored with **CRLF (Windows) line endings** (enforced by `.gitattributes`);
+   the VBA editor's importer needs CRLF to read the module header. If a module ever
+   imports oddly, your `src/` copies may be LF — re-checkout so the CRLF from
+   `.gitattributes` applies (`del /Q src\*.bas` then `git checkout -- src`).
 3. **Debug → Compile VBAProject**. No message appears on success — the menu item just
    greys out. That's a clean compile.
 4. Save as `SamSam.pptm` (macro-enabled) somewhere in the repo folder — this is your
